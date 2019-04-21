@@ -1,0 +1,414 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"
+    />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    ul li p {
+      padding: 5px 15px;
+    }
+    .input {
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <ul>
+      <li>
+        <p>设置分享:</p>
+        <p><button id="J_shareBtn">设置分享</button></p>
+      </li>
+      <li>
+        <p>设置标题(setTitle):</p>
+        <p>
+          <input
+            type="text"
+            class="input"
+            id="J_titleText"
+            placeholder="主标题"
+          />
+        </p>
+        <p>
+          <input
+            type="text"
+            class="input"
+            id="J_subTitleText"
+            placeholder="副标题"
+          />
+          <button id="J_setTitle">设置标题</button>
+        </p>
+      </li>
+      <li>
+        <p>关闭webview:</p>
+        <p><button id="J_closeWebview">关闭webview</button></p>
+      </li>
+      <li>
+        <p>获取设备信息(getModuleInfo)</p>
+        <p><button id="J_getModuleInfo">获取设备信息</button></p>
+        <p><div id="J_output"></div></p>
+      </li>
+      <li>
+        <p>获取用户登录信息(getUserLoginInfo)</p>
+        <p><button id="J_getUserLoginInfo">获取用户登录信息</button></p>
+        <p><div id="J_outputUserInfo"></div></p>
+      </li>
+      <li>
+        <p>股吧回帖:</p>
+        <p><button id="J_replyComment">股吧回帖</button></p>
+      </li>
+      <li>
+        <p>资金账号登录:</p>
+        <p><button id="J_doTradeLogin">资金账号登录</button></p>
+      </li>
+      <li>
+        <p>原生登录:</p>
+        <p><button id="J_doLogin">原生登录</button></p>
+      </li>
+      <li>
+        <p>原生弹窗:</p>
+        <p><button id="J_alert">原生弹窗</button></p>
+      </li>
+      <li>
+        <p>获取资金账号登录信息:</p>
+        <p><button id="J_getLocalCurrentFuncid">获取资金账号登录信息</button></p>
+        <p><div id="J_outputFundInfo"></div></p>
+      </li>
+      <li>
+        <p>android拨打电话:</p>
+        <p><button id="J_callTel">android拨打电话</button></p>
+      </li>
+      <li>
+        <p>获取终端设备信息:</p>
+        <p><button id="J_getDeviceInfo">获取终端设备信息</button></p>
+        <p><div id="J_outputDeviceInfo"></div></p>
+      </li>
+      <li>
+        <p>判断是否在app内:</p>
+        <p><button id="J_isInApp">判断是否在app内</button></p>
+      </li>
+      <li>
+        <p>唤起相册上传图片 - 主包ios</p>
+        <p><button id="J_xyUploadGallary">唤起相册上传图片 - 主包ios</button></p>
+        <p><div id="J_xyUploadImageGallary"></div></p>
+      </li>
+      <li>
+        <p>唤起相机上传图片 - 主包ios</p>
+        <p><button id="J_xyUpload">唤起相机上传图片 - 主包ios</button></p>
+        <p><div id="J_xyUploadImage"></div></p>
+      </li>
+      <li>
+        <p>图片上传:</p>
+        <p><button id="J_upload">图片上传</button></p>
+        <p><div id="J_uploadImage"></div></p>
+      </li>
+      <li>
+        <p>通用图片上传</p>
+        <p><button id="J_uploadcommon">图片上传</button></p>
+        <p><div id="J_uploadImagecommon"></div></p>
+      </li>
+      <li>
+        <p>图片放大:</p>
+        <p><img id="J_openImage" src="http://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/838ba61ea8d3fd1f3402ada1344e251f95ca5f25.jpg" height="150" /></p>
+      </li>
+      <li>
+        <p>风险测评:</p>
+        <p><button id="J_doRisk">风险测评</button></p>
+      </li>
+      <li>
+        <p>打开交易容器</p>
+        <p><button id="J_openTradeView">打开交易容器</button></p>
+      </li>
+      <li>
+        <p>发帖</p>
+        <p><button id="J_openComment">发帖</button></p>
+      </li>
+      <li>
+        <p>刷新用户信息</p>
+        <p><button id="J_reloadUserInfo">刷新用户信息</button></p>
+      </li>
+      <li>
+        <p>浏览器基础信息</p>
+        <p id="J_browserInfo"></p>
+      </li>
+      <li>
+        <p>判断是否登录，如果没有登录，就去登录</p>
+        <p><button id="J_gotoLogin">点击按钮</button></p>
+      </li>
+      <li>
+        <p>资金账号登录，并带跳转url</p>
+        <p><button id="J_eventTradeLoginWithJumpUrl">点击按钮</button></p>
+      </li>
+    </ul>
+  </body>
+</html>
+<script>
+  window.onload = function() {
+    est.onResume(() => {
+      alert('onresume')
+    })
+    document.getElementById('J_eventTradeLoginWithJumpUrl').addEventListener('click', function() {
+      est.eventTradeLoginWithJumpUrl({
+        targetUrl: 'http://www.baidu.com'
+      })
+    })
+    
+
+
+    document.getElementById('J_shareBtn').addEventListener('click', function() {
+      const shareData = {
+        type: 'weixin,pengyouquan,weibo',
+        title: '【面对面】',
+        img: 'https://xxxxxx.com/APP/resource/img/logo.png',
+        url: location.href,
+        desc: '优中----'
+      }
+      est.setOptionShare(shareData)
+
+      setTimeout(() => {
+        est.hideRightBtn()
+      }, 2000)
+    })
+
+    document.getElementById('J_setTitle').addEventListener('click', function() {
+      est.setTitleForTrade({
+        title1: document.getElementById('J_titleText').value,
+        title2: document.getElementById('J_subTitleText').value
+      })
+      est.setTitle({
+        title1: document.getElementById('J_titleText').value,
+        title2: document.getElementById('J_subTitleText').value
+      })
+    })
+
+    document
+      .getElementById('J_closeWebview')
+      .addEventListener('click', function() {
+        est.closeWebView()
+      })
+
+    document
+      .getElementById('J_getModuleInfo')
+      .addEventListener('click', function() {
+        est.getModuleInfo(
+          {
+            type: 'all'
+          },
+          function(val) {
+            console.log(val)
+            document.getElementById('J_output').innerHTML =
+              val.data.deviceInfo.network
+          }
+        )
+      })
+
+    document.getElementById('J_replyComment').addEventListener('click', function() {
+      est.gubaReplyComment({
+        tid: '5497',
+        hid: '12313',
+        h_name: 'asdf'
+      }, function() {
+        alert(321)
+      })
+    })
+
+    document.getElementById('J_getUserLoginInfo').addEventListener('click', function() {
+      est.getUserLoginInfo(function(val) {
+        document.getElementById('J_outputUserInfo').innerHTML = JSON.stringify(val)
+      })
+    })
+
+    document.getElementById('J_doLogin').addEventListener('click', function() {
+      est.eventLogin(function(isLogin) {
+        if (Number(isLogin.code) === 0) {
+          alert(321)
+        }
+      })
+    })
+
+    document.getElementById('J_doTradeLogin').addEventListener('click', function() {
+      est.eventTradeLogin(function(isLogin) {
+        console.log(isLogin)
+        alert(123456789)
+      })
+    })
+
+    document.getElementById('J_alert').addEventListener('click', function() {
+      est.nativeAlert({
+        msg: '这个是原生弹窗'
+      })
+    })
+
+    document.getElementById('J_getLocalCurrentFuncid').addEventListener('click', function() {
+      est.getLocalCurrentFuncid(function(val) {
+        document.getElementById('J_outputFundInfo').innerHTML = val.token || 'i am real token'
+      })
+    })
+
+    document.getElementById('J_callTel').addEventListener('click', function() {
+      est.callTelForAndroid('09876543210')
+    })
+    
+    document.getElementById('J_getDeviceInfo').addEventListener('click', function() {
+      est.getDeviceInfo(function(val) {
+        document.getElementById('J_outputDeviceInfo').innerHTML = val.data.DeviceType
+      })
+    })
+
+    document.getElementById('J_isInApp').addEventListener('click', function() {
+      alert(est.inApp)
+    })
+
+    document.getElementById('J_xyUploadGallary').addEventListener('click', function() {
+      const paramStr = 'photo,,,,http://xy.com/Upload/Upload_Img,http://xy.com/Upload/Upload_Img'
+      est.uploadPhotoForTrade(paramStr, function() {
+        document.getElementById('J_xyUploadImageGallary').innerHTML = 'loading...'
+      }, function() {
+        const result = JSON.parse(arguments[1])
+        if (result.Status === 0) {
+          const newImage = new Image()
+          newImage.height = '200'
+          newImage.src = result.Result.urls[0]
+          document.getElementById('J_xyUploadImageGallary').innerHTML = ''
+          document.getElementById('J_xyUploadImageGallary').appendChild(newImage)
+        }
+      })
+    })
+
+    document.getElementById('J_xyUpload').addEventListener('click', function() {
+      const paramStr = 'camera,,,,http://xy.com/Upload/Upload_Img,http://xy.com/Upload/Upload_Img'
+      est.uploadPhotoForTrade(paramStr, function() {
+        document.getElementById('J_xyUploadImage').innerHTML = 'loading...'
+      }, function() {
+        const result = JSON.parse(arguments[1])
+        if (result.Status === 0) {
+          const newImage = new Image()
+          newImage.height = '200'
+          newImage.src = result.Result.urls[0]
+          document.getElementById('J_xyUploadImage').innerHTML = ''
+          document.getElementById('J_xyUploadImage').appendChild(newImage)
+        }
+      })
+    })
+
+    document.getElementById('J_upload').addEventListener('click', function() {
+      est.uploadPhoto({
+        autoCamera: true,
+        uploadurl: 'http://xy.com/Upload/Upload_Img',
+        restNumber: 2
+      }, function() {
+        document.getElementById('J_uploadImage').innerHTML = 'loading'
+      }, function(res) {
+        if (res.Status === 0) {
+          const newImage = new Image()
+          newImage.height = '200'
+          newImage.src = res.Result.urls[0]
+          newImage.onload = function() {
+            document.getElementById('J_uploadImage').innerHTML = ''
+            document.getElementById('J_uploadImage').appendChild(newImage)
+          }
+        }        
+      })
+    })
+
+    document.getElementById('J_uploadcommon').addEventListener('click', function() {
+      est.uploadPhotoCommon({
+        openType: 'camera',
+        username: '',
+        hashcode: '',
+        photoURL: 'http://xy.com/Upload/Upload_Img',
+        ocrPhotoURL: 'http://xy.com/Upload/Upload_Img',
+
+        autoCamera: true,
+        uploadurl: 'http://xy.com/Upload/Upload_Img',
+        restNumber: 2
+      }, function() {
+        document.getElementById('J_uploadImagecommon').innerHTML = 'loading'
+      }, function(res1, res2) {
+        let result = res1
+        if (res2) {
+          result = JSON.parse(res2)
+        }
+
+        if (result.Status === 0) {
+          const newImage = new Image()
+          newImage.height = '200'
+          newImage.src = result.Result.urls[0]
+          newImage.onload = function() {
+            document.getElementById('J_uploadImagecommon').innerHTML = ''
+            document.getElementById('J_uploadImagecommon').appendChild(newImage)
+          }
+        }        
+      })
+    })
+
+    document.getElementById('J_openImage').addEventListener('click', function() {
+      est.imagePreview({
+        pos: 0,
+        images: [
+          {
+            url: 'http://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/838ba61ea8d3fd1f3402ada1344e251f95ca5f25.jpg',
+            pos: 0
+          }
+        ]
+      })
+    })
+
+    document.getElementById('J_doRisk').addEventListener('click', function() {
+      est.showInvestorVerify(function() {
+        window.location.reload()
+      }, function() {
+        console.log('showInvestorVerify_close')
+      })
+    })
+
+    document.getElementById('J_openTradeView').addEventListener('click', function() {
+      est.pushWindow(window.location.href)
+    })
+
+    document.getElementById('J_openComment').addEventListener('click', function() {
+      var param = { mainCode: '12345', showFace: false }
+      est.gubaPostComment(param)
+    })
+
+    document.getElementById('J_reloadUserInfo').addEventListener('click', function() {
+      var jsonObj = {
+        module: 'verification',
+        param: {
+          verification: {
+            IsPassRiskTest: true,
+            IsEnsureQualifiedInvestor: true,
+            RiskAbility: 0,
+            RiskAbilityName: "",
+            RiskAbilityDescription: "",
+            IsValidatedPass: true,
+            IsLogin: true
+          }
+        }
+      }
+      est.reloadUserInfo(jsonObj)
+    })
+
+    document.getElementById('J_browserInfo').innerHTML = est.browser.name + '-' + est.browser.os + '-' + est.browser.version
+
+    document.getElementById('J_gotoLogin').addEventListener('click', function() {
+      est.getUserLoginInfo(val => {
+        // loadpage()
+        if (!val || Number(val.code) !== 0) {
+          est.eventLogin(val => {
+            console.log('123')
+          })
+        }
+      })
+    })
+  }
+  
+  
+</script>
